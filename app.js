@@ -18,14 +18,14 @@ if(process.env.FRONTEND_URL){
     app.use(cors({
         origin: process.env.FRONTEND_URL,
         methods: ["GET","POST"],
-        allowedHeaders: ["Contennt-Type"]
+        allowedHeaders: ["Content-Type"]
     }));
 }
 
 //endpoint de bienvenida
 app.get("/", (req, res) => {
     res.json({
-        mensaje: "Bienvenido a la API, version 2",
+       mensaje: "Bienvenido a la API, version 3",
         entorno: NODE_ENV
     });
 });
@@ -41,7 +41,7 @@ app.get("/health", (req, res) => {
 
 //endpoint obtener productos
 app.get("/api/productos", (req,res) => {
-    res.status(200).json([
+    //middleware centrals(200).json([
         {id: 1, nombre: "Teclado", precio: 250},
         {id: 2, nombre: "Mouse", precio: 125}
     ]);
@@ -56,7 +56,7 @@ app.post("/api/productos", (req,res) => {
         typeof precio != "number" || !Number.isFinite(precio) ||
         precio <= 0
     ){
-        return res.status(400).json({
+        return //middleware centrals(400).json({
             error: "Datos de producto inválidos"
         });
     }
@@ -79,7 +79,7 @@ app.use((req,res) => {
 app.use((err, req, res, next) =>{
     console.error("Error", err.message);
 
-    res.status(error.status || 500).json({
+    res.status(err.status || 500).json({
         error: "Error procesando la solicitud"
     });
 });
