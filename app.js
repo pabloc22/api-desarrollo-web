@@ -41,7 +41,7 @@ app.get("/health", (req, res) => {
 
 //endpoint obtener productos
 app.get("/api/productos", (req,res) => {
-    //middleware centrals(200).json([
+     res.status(200).json([
         {id: 1, nombre: "Teclado", precio: 250},
         {id: 2, nombre: "Mouse", precio: 125}
     ]);
@@ -56,7 +56,7 @@ app.post("/api/productos", (req,res) => {
         typeof precio != "number" || !Number.isFinite(precio) ||
         precio <= 0
     ){
-        return //middleware centrals(400).json({
+          return res.status(400).json({
             error: "Datos de producto inválidos"
         });
     }
